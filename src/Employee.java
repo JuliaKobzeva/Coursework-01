@@ -3,10 +3,15 @@ public class Employee {
     private int department;
     private int salary;
 
+    private static int counter = 1;
+
+    private int id = counter;
+
     public Employee(String name, int department, int salary){
         this.name = name;
         this.department = department;
         this.salary = salary;
+        counter++;
     }
 
     public String getName(){
@@ -27,6 +32,10 @@ public class Employee {
 
     public void setSalary(int salary){
         this.salary = salary;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override

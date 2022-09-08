@@ -48,6 +48,7 @@ public class Main {
         System.out.println("Средняя зарплата: " + averageSalary + " руб");
 
         getToKnowName(list);
+        countId(list);
 
     }
 
@@ -128,6 +129,13 @@ public class Main {
 
         for (int i = 0; i < list.length; i++) {
             System.out.println(list[i].getName());
+        }
+    }
+
+    private static void countId (Employee list[]) {
+
+        for (int i = 0; i < list.length; i++) {
+            System.out.println(list[i].getId() + " " + list[i].getName());
         }
     }
 
