@@ -176,7 +176,6 @@ public class Main {
         }
     }
 
-
     //найти сотрудника с минимальной зарплатой
 
     private static void getToKnowNameMinExpenseInDepartment (int department, Employee list[]) {
@@ -193,14 +192,14 @@ public class Main {
 
     private static void getToKnowSumInDepartment (int department, int numberOfPeople, Employee list[]) {
         for (int i = 0; i < list.length; i++)  {
-            int [] sum = new int [numberOfPeople];
-            sum[0] = list[i].getSalary();
+            int [] salary = new int [numberOfPeople];
+            salary[0] = list[i].getSalary();
 
-            for(int j = 1 ; j <= sum.length-1; j++) {
-                sum[numberOfPeople - j] = list[i + (numberOfPeople-j)].getSalary();
+            for(int j = 1 ; j <= salary.length-1; j++) {
+                salary[numberOfPeople - j] = list[i + (numberOfPeople-j)].getSalary();
             }
 
-            int result = IntStream.of(sum).sum();
+            int result = IntStream.of(salary).sum();
 
             if (list[i].getDepartment() == department){
                 System.out.println("Сумма затрат на зарплату по отделу: " + result);
@@ -214,14 +213,14 @@ public class Main {
     private static void getToKnowAverageSalaryInDepartment (int department, int numberOfPeople, Employee list[]) {
         for (int i = 0; i < list.length; i++)  {
 
-            int [] sum = new int [numberOfPeople];
-            sum[0] = list[i].getSalary();
+            int [] salary = new int [numberOfPeople];
+            salary[0] = list[i].getSalary();
 
-            for(int j = 1 ; j <= sum.length-1; j++) {
-            sum[numberOfPeople - j] = list[i + (numberOfPeople-j)].getSalary();
+            for(int j = 1 ; j <= salary.length-1; j++) {
+                salary[numberOfPeople - j] = list[i + (numberOfPeople-j)].getSalary();
             }
 
-            int result = IntStream.of(sum).sum();
+            int result = IntStream.of(salary).sum();
 
             if (list[i].getDepartment() == department){
                 int averageSalary = result/ numberOfPeople;
