@@ -104,20 +104,6 @@ public class Main {
         return nameMaxExpense;
     }
 
-    //найти максимальную зарплату
-
-    private static int countMaxExpense (Employee list[]) {
-        int maxExpense = -1;
-
-        for (int i = 0; i < list.length; i++) {
-            if (list[i].getSalary() > maxExpense) {
-                maxExpense = list[i].getSalary();
-            }
-        }
-
-        return maxExpense;
-    }
-
     //найти сотрудника с минимальной зарплатой
 
     private static String getToKnowNameMinExpense (Employee list[]) {
@@ -131,19 +117,6 @@ public class Main {
             }
         }
         return nameMinExpense;
-    }
-
-    //найти минимальную зарплату
-
-    private static int countMinExpense (Employee list[]) {
-        int minExpense = list[0].getSalary();
-
-        for (int i = 0; i < list.length; i++) {
-            if (list[i].getSalary() < minExpense){
-                minExpense = list[i].getSalary();
-            }
-        }
-        return minExpense;
     }
 
     //найти среднюю зарплату
