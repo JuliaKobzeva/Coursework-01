@@ -36,14 +36,8 @@ public class Main {
         String nameMaxExpense = getToKnowNameMaxExpense(list);
         System.out.println("Сотрудник с максимальной зарплатой: " + nameMaxExpense);
 
-        int maxExpense = countMaxExpense(list);
-        System.out.println("Максимальная зарплата " + maxExpense + " руб");
-
         String nameMinExpense = getToKnowNameMinExpense(list);
         System.out.println("Сотрудник с минимальной зарплатой: " + nameMinExpense);
-
-        int minExpense = countMinExpense(list);
-        System.out.println("Минимальная зарплата " + minExpense + " руб");
 
         int averageSalary = countAverageSalary (list);
         System.out.println("Средняя зарплата: " + averageSalary + " руб");
