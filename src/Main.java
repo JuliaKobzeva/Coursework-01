@@ -226,13 +226,14 @@ public class Main {
 
     private static int getToKnowAverageSalaryInDepartment (int department, Employee list[]) {
 
-        int sum = getToKnowSumInDepartment(4, list);
+        int sum = 0;
 
         int salary =0;
 
         for (int i = 0; i < list.length; i++)  {
 
             if (list[i] != null && list[i].getDepartment() == department){
+                sum = sum + list[i].getSalary();
                 salary++;
             }
         }
