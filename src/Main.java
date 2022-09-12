@@ -58,7 +58,9 @@ public class Main {
         System.out.println("Сумма затрат на зарплату по отделу: " + sum2);
 
 
-        getToKnowAverageSalaryInDepartment(4, list);
+        int averageSalaryInDepartment = getToKnowAverageSalaryInDepartment(4, list);
+        System.out.println("Средняя зарплата по отделу: " + averageSalaryInDepartment);
+
         increaseSalaryInDepartment(4,5,list);
 
         getToKnowPersonInDepartmentWithSalaryLessThan(4,50000,list);
@@ -222,18 +224,9 @@ public class Main {
 
     //найти среднюю зарплату по отделу
 
-    private static void getToKnowAverageSalaryInDepartment (int department, Employee list[]) {
+    private static int getToKnowAverageSalaryInDepartment (int department, Employee list[]) {
 
         int sum = getToKnowSumInDepartment(4, list);
-
-        int salary = getToKnowNumberOfPeopleInDepartment (4, list);
-
-        int averageSalary = sum/ salary;
-        System.out.println("Средняя зарплата по отделу: " + averageSalary + salary);
-
-    }
-
-    private static int getToKnowNumberOfPeopleInDepartment (int department, Employee list[]) {
 
         int salary =0;
 
@@ -243,8 +236,12 @@ public class Main {
                 salary++;
             }
         }
-        return salary;
+
+        int averageSalary = sum/ salary;
+
+        return averageSalary;
     }
+
 
     //проиндексировать зарплату всех сотрудников отдела на процент, который приходит в качестве параметра
 
