@@ -1,20 +1,17 @@
-import java.util.Arrays;
-import java.util.stream.IntStream;
-
 public class Main {
 
     public static void main(String[] args) {
 
-        Employee dSazonova = new Employee("Дарья Васильевна Сазонова", 1, 47000);
-        Employee iVoronzov = new Employee("Игорь Борисович Воронцов", 1, 63000);
-        Employee mIvanova = new Employee("Мария Павловна Иванова", 2, 55000);
-        Employee dBorisov = new Employee("Денис Иванович Борисов", 2, 57000);
-        Employee jEliseeva = new Employee("Юлия Николаевна Елисеева", 3, 65000);
-        Employee pFirsov = new Employee("Павел Иванович Фирсов", 3, 48000);
-        Employee gPokidov = new Employee("Григорий Николаевич Покидов", 4, 50000);
-        Employee oGoraynova = new Employee("Оксана Михайловна Горяйнова", 4, 45000);
-        Employee iGoncharov = new Employee("Игорь Денисович Гончаров", 4, 65000);
-        Employee sLivanova = new Employee("Светлана Савельевна Ливанова", 5, 53000);
+        Employee dSazonova = new Employee("Дарья", "Васильевна", "Сазонова", 1, 47000);
+        Employee iVoronzov = new Employee("Игорь", "Борисович", "Воронцов", 1, 63000);
+        Employee mIvanova = new Employee("Мария", "Павловна", "Иванова", 2, 55000);
+        Employee dBorisov = new Employee("Денис", "Иванович", "Борисов", 2, 57000);
+        Employee jEliseeva = new Employee("Юлия", "Николаевна", "Елисеева", 3, 65000);
+        Employee pFirsov = new Employee("Павел", "Иванович", "Фирсов", 3, 48000);
+        Employee gPokidov = new Employee("Григорий", "Николаевич", "Покидов", 4, 50000);
+        Employee oGoraynova = new Employee("Оксана", "Михайловна", "Горяйнова", 4, 45000);
+        Employee iGoncharov = new Employee("Игорь", "Денисович", "Гончаров", 4, 65000);
+        Employee sLivanova = new Employee("Светлана", "Савельевна", "Ливанова", 5, 53000);
 
         Employee[] list = new Employee[10];
         list[0] = dSazonova;
@@ -51,11 +48,18 @@ public class Main {
 
         printAllInDepartment (4, list);
 
-        getToKnowNameMaxExpenseInDepartment(4, list);
-        getToKnowNameMinExpenseInDepartment(4, list);
-        getToKnowSumInDepartment(4, 3, list);
+        String NameMaxExpenseInDepartment = getToKnowNameMaxExpenseInDepartment(4, list);
+        System.out.println("Сотрудник в отделе с максимальной зарплатой: " + NameMaxExpenseInDepartment);
+
+        String NameMinExpenseInDepartment = getToKnowNameMinExpenseInDepartment(4, list);
+        System.out.println("Сотрудник в отделе с минимальной зарплатой: " + NameMinExpenseInDepartment);
+
+        int sum2 = getToKnowSumInDepartment(4, list);
+        System.out.println("Сумма затрат на зарплату по отделу: " + sum2);
+
+
         getToKnowAverageSalaryInDepartment(4, 3, list);
-        increaseSalaryInDepartment(4, 3,5,list);
+        increaseSalaryInDepartment(4,5,list);
 
         getToKnowPersonInDepartmentWithSalaryLessThan(4,50000,list);
         getToKnowPersonInDepartmentWithSalaryMoreThan(4,50000,list);
@@ -91,7 +95,7 @@ public class Main {
         for (int i = 0; i < list.length; i++) {
             if (list[i].getSalary() > maxExpense) {
                 maxExpense = list[i].getSalary();
-               nameMaxExpense = list[i].getName();
+               nameMaxExpense = list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname();
             }
         }
 
@@ -107,7 +111,7 @@ public class Main {
         for (int i = 0; i < list.length; i++) {
             if (list[i].getSalary() < minExpense){
                 minExpense = list[i].getSalary();
-                nameMinExpense = list[i].getName();
+                nameMinExpense = list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname();
             }
         }
         return nameMinExpense;
@@ -127,7 +131,7 @@ public class Main {
     private static void getToKnowName (Employee list[]) {
 
         for (int i = 0; i < list.length; i++) {
-            System.out.println(list[i].getName());
+            System.out.println(list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname());
         }
     }
 
@@ -136,7 +140,7 @@ public class Main {
     private static void countId (Employee list[]) {
 
         for (int i = 0; i < list.length; i++) {
-            System.out.println(list[i].getId() + " " + list[i].getName());
+            System.out.println(list[i].getId() + " " + list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname());
         }
     }
 
@@ -157,73 +161,64 @@ public class Main {
 
         for (int i = 0; i < list.length; i++)  {
             if (list[i].getDepartment() == department){
-                System.out.println(list[i].getId() + " " + list[i].getName() + ", зарплата: " + list[i].getSalary() + " руб");
+                System.out.println(list[i].getId() + " " + list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname() + ", зарплата: " + list[i].getSalary() + " руб");
             }
         }
     }
 
     //найти сотрудника с максимальной зарплатой
 
-    //Не выводит нужного сотрудника, хотя логика такая же, как в методе для всех отделов, и там она работает
-
-    private static void getToKnowNameMaxExpenseInDepartment (int department, Employee list[]) {
+    private static String getToKnowNameMaxExpenseInDepartment (int department, Employee list[]) {
         int maxExpense = -1;
+        String nameMaxExpense = null;
+
         for (int i = 0; i < list.length; i++) {
             if (list[i].getDepartment() == department && list[i].getSalary() > maxExpense) {
                 maxExpense = list[i].getSalary();
-                System.out.println("Сотрудник в отделе с максимальной зарплатой: " + list[i].getName());
+                nameMaxExpense = list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname();
             }
         }
+
+        return nameMaxExpense;
     }
 
     //найти сотрудника с минимальной зарплатой
 
-    private static void getToKnowNameMinExpenseInDepartment (int department, Employee list[]) {
+    private static String getToKnowNameMinExpenseInDepartment (int department, Employee list[]) {
         int minExpense = list[0].getSalary();
+        String nameMinExpense = list[0].getName();
+
         for (int i = 0; i < list.length; i++)  {
             if (list[i].getDepartment() == department && list[i].getSalary() < minExpense){
                 minExpense = list[i].getSalary();
-                System.out.println("Сотрудник в отделе с минимальной зарплатой: " + list[i].getName());
+                nameMinExpense = list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname();
             }
         }
+        return nameMinExpense;
     }
 
     //найти сумму затрат на зарплату по отделу
 
-    private static void getToKnowSumInDepartment (int department, int numberOfPeople, Employee list[]) {
+    private static int getToKnowSumInDepartment (int department, Employee[] list) {
+        int sum = 0;
         for (int i = 0; i < list.length; i++)  {
-            int [] salary = new int [numberOfPeople];
-            salary[0] = list[i].getSalary();
-
-            for(int j = 1 ; j <= salary.length-1; j++) {
-                salary[numberOfPeople - j] = list[i + (numberOfPeople-j)].getSalary();
-            }
-
-            int result = IntStream.of(salary).sum();
-
             if (list[i].getDepartment() == department){
-                System.out.println("Сумма затрат на зарплату по отделу: " + result);
-                break;
+                sum = sum + list[i].getSalary();
             }
         }
+        return sum;
     }
 
     //найти среднюю зарплату по отделу
 
     private static void getToKnowAverageSalaryInDepartment (int department, int numberOfPeople, Employee list[]) {
+
         for (int i = 0; i < list.length; i++)  {
 
-            int [] salary = new int [numberOfPeople];
-            salary[0] = list[i].getSalary();
-
-            for(int j = 1 ; j <= salary.length-1; j++) {
-                salary[numberOfPeople - j] = list[i + (numberOfPeople-j)].getSalary();
-            }
-
-            int result = IntStream.of(salary).sum();
+            int sum = getToKnowSumInDepartment(4, list);
 
             if (list[i].getDepartment() == department){
-                int averageSalary = result/ numberOfPeople;
+                int averageSalary = sum/ numberOfPeople;
                 System.out.println("Средняя зарплата по отделу: " + averageSalary);
                 break;
             }
@@ -232,13 +227,15 @@ public class Main {
 
     //проиндексировать зарплату всех сотрудников отдела на процент, который приходит в качестве параметра
 
-    private static void increaseSalaryInDepartment (int department, int numberOfPeople, int percent, Employee list[]) {
+    private static void increaseSalaryInDepartment (int department,  int percent, Employee list[]) {
         for (int i = 0; i < list.length; i++)  {
             if (list[i].getDepartment() == department){
-                int [] newSalary = new int [numberOfPeople];
-                newSalary[numberOfPeople-1] = list[i].getSalary() + list[i].getSalary()/100 * percent;
 
-                System.out.println("Зарплата после индексирования: " + newSalary[numberOfPeople-1] + " руб (" + list[i].getName()+ ")");
+                int salary = 0;
+
+                salary = list[i].getSalary() + list[i].getSalary()/100 * percent;
+
+                System.out.println("Зарплата после индексирования: " +  salary + " руб (" + list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname() + ")");
             }
         }
     }
@@ -248,7 +245,7 @@ public class Main {
     private static void getToKnowPersonInDepartmentWithSalaryLessThan (int department, int number, Employee list[]) {
         for (int i = 0; i < list.length; i++)  {
             if (list[i].getDepartment() == department && list[i].getSalary() < number){
-                System.out.println(list[i].getId() + " " + list[i].getName() + ", зарплата: " + list[i].getSalary() + " руб");
+                System.out.println(list[i].getId() + " " + list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname() + ", зарплата: " + list[i].getSalary() + " руб");
             }
         }
     }
@@ -258,7 +255,7 @@ public class Main {
     private static void getToKnowPersonInDepartmentWithSalaryMoreThan (int department, int number, Employee list[]) {
         for (int i = 0; i < list.length; i++)  {
             if (list[i].getDepartment() == department && list[i].getSalary() > number){
-                System.out.println(list[i].getId() + " " + list[i].getName() + ", зарплата: " + list[i].getSalary() + " руб");
+                System.out.println(list[i].getId() + " " + list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname() + ", зарплата: " + list[i].getSalary() + " руб");
             }
         }
     }
