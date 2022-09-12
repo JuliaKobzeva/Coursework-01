@@ -58,7 +58,7 @@ public class Main {
         System.out.println("Сумма затрат на зарплату по отделу: " + sum2);
 
 
-        getToKnowAverageSalaryInDepartment(4, 3, list);
+        getToKnowAverageSalaryInDepartment(4, list);
         increaseSalaryInDepartment(4,5,list);
 
         getToKnowPersonInDepartmentWithSalaryLessThan(4,50000,list);
@@ -72,7 +72,9 @@ public class Main {
 
     private static void printAll (Employee list[]) {
         for (int i = 0; i < list.length; i++) {
+            if(list[i] != null){
             System.out.println(list[i]);
+            }
         }
     }
 
@@ -81,7 +83,9 @@ public class Main {
     private static int countSum (Employee list[]) {
         int sum = 0;
         for (int i = 0; i < list.length; i++) {
+            if(list[i] != null) {
                 sum = sum + list[i].getSalary();
+            }
         }
         return sum;
     }
@@ -93,7 +97,7 @@ public class Main {
         String nameMaxExpense = null;
 
         for (int i = 0; i < list.length; i++) {
-            if (list[i].getSalary() > maxExpense) {
+            if (list[i] != null && list[i].getSalary() > maxExpense) {
                 maxExpense = list[i].getSalary();
                nameMaxExpense = list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname();
             }
@@ -109,7 +113,7 @@ public class Main {
         String nameMinExpense = list[0].getName();
 
         for (int i = 0; i < list.length; i++) {
-            if (list[i].getSalary() < minExpense){
+            if (list[i] != null && list[i].getSalary() < minExpense){
                 minExpense = list[i].getSalary();
                 nameMinExpense = list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname();
             }
@@ -121,6 +125,7 @@ public class Main {
 
     private static int countAverageSalary (Employee list[]) {
         int sum = countSum (list);
+
         int averageSalary = sum / list.length;
 
         return averageSalary;
@@ -131,7 +136,9 @@ public class Main {
     private static void getToKnowName (Employee list[]) {
 
         for (int i = 0; i < list.length; i++) {
-            System.out.println(list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname());
+            if(list[i] != null) {
+                System.out.println(list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname());
+            }
         }
     }
 
@@ -140,7 +147,9 @@ public class Main {
     private static void countId (Employee list[]) {
 
         for (int i = 0; i < list.length; i++) {
-            System.out.println(list[i].getId() + " " + list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname());
+            if(list[i] != null) {
+                System.out.println(list[i].getId() + " " + list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname());
+            }
         }
     }
 
@@ -150,8 +159,10 @@ public class Main {
 
     private static void increaseSalary (int percent, Employee list[]) {
         for (int i = 0; i < list.length; i++) {
-            list[i].setSalary(list[i].getSalary() + list[i].getSalary()/100 * percent);
-            System.out.println(list[i].getId() + " " + list[i].getSalary());
+            if(list[i] != null) {
+                list[i].setSalary(list[i].getSalary() + list[i].getSalary() / 100 * percent);
+                System.out.println(list[i].getId() + " " + list[i].getSalary());
+            }
         }
     }
 
@@ -160,7 +171,7 @@ public class Main {
     private static void printAllInDepartment (int department, Employee list[]) {
 
         for (int i = 0; i < list.length; i++)  {
-            if (list[i].getDepartment() == department){
+            if (list[i] != null && list[i].getDepartment() == department){
                 System.out.println(list[i].getId() + " " + list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname() + ", зарплата: " + list[i].getSalary() + " руб");
             }
         }
@@ -173,7 +184,7 @@ public class Main {
         String nameMaxExpense = null;
 
         for (int i = 0; i < list.length; i++) {
-            if (list[i].getDepartment() == department && list[i].getSalary() > maxExpense) {
+            if (list[i] != null && list[i].getDepartment() == department && list[i].getSalary() > maxExpense) {
                 maxExpense = list[i].getSalary();
                 nameMaxExpense = list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname();
             }
@@ -189,7 +200,7 @@ public class Main {
         String nameMinExpense = list[0].getName();
 
         for (int i = 0; i < list.length; i++)  {
-            if (list[i].getDepartment() == department && list[i].getSalary() < minExpense){
+            if (list[i] != null && list[i].getDepartment() == department && list[i].getSalary() < minExpense){
                 minExpense = list[i].getSalary();
                 nameMinExpense = list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname();
             }
@@ -202,7 +213,7 @@ public class Main {
     private static int getToKnowSumInDepartment (int department, Employee[] list) {
         int sum = 0;
         for (int i = 0; i < list.length; i++)  {
-            if (list[i].getDepartment() == department){
+            if (list[i] != null && list[i].getDepartment() == department){
                 sum = sum + list[i].getSalary();
             }
         }
@@ -211,25 +222,35 @@ public class Main {
 
     //найти среднюю зарплату по отделу
 
-    private static void getToKnowAverageSalaryInDepartment (int department, int numberOfPeople, Employee list[]) {
+    private static void getToKnowAverageSalaryInDepartment (int department, Employee list[]) {
+
+        int sum = getToKnowSumInDepartment(4, list);
+
+        int salary = getToKnowNumberOfPeopleInDepartment (4, list);
+
+        int averageSalary = sum/ salary;
+        System.out.println("Средняя зарплата по отделу: " + averageSalary + salary);
+
+    }
+
+    private static int getToKnowNumberOfPeopleInDepartment (int department, Employee list[]) {
+
+        int salary =0;
 
         for (int i = 0; i < list.length; i++)  {
 
-            int sum = getToKnowSumInDepartment(4, list);
-
-            if (list[i].getDepartment() == department){
-                int averageSalary = sum/ numberOfPeople;
-                System.out.println("Средняя зарплата по отделу: " + averageSalary);
-                break;
+            if (list[i] != null && list[i].getDepartment() == department){
+                salary++;
             }
         }
+        return salary;
     }
 
     //проиндексировать зарплату всех сотрудников отдела на процент, который приходит в качестве параметра
 
     private static void increaseSalaryInDepartment (int department,  int percent, Employee list[]) {
         for (int i = 0; i < list.length; i++)  {
-            if (list[i].getDepartment() == department){
+            if (list[i] != null && list[i].getDepartment() == department){
 
                 int salary = 0;
 
@@ -244,7 +265,7 @@ public class Main {
 
     private static void getToKnowPersonInDepartmentWithSalaryLessThan (int department, int number, Employee list[]) {
         for (int i = 0; i < list.length; i++)  {
-            if (list[i].getDepartment() == department && list[i].getSalary() < number){
+            if (list[i] != null && list[i].getDepartment() == department && list[i].getSalary() < number){
                 System.out.println(list[i].getId() + " " + list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname() + ", зарплата: " + list[i].getSalary() + " руб");
             }
         }
@@ -254,7 +275,7 @@ public class Main {
 
     private static void getToKnowPersonInDepartmentWithSalaryMoreThan (int department, int number, Employee list[]) {
         for (int i = 0; i < list.length; i++)  {
-            if (list[i].getDepartment() == department && list[i].getSalary() > number){
+            if (list[i] != null && list[i].getDepartment() == department && list[i].getSalary() > number){
                 System.out.println(list[i].getId() + " " + list[i].getName() + " " + list[i].getName2() + " " + list[i].getSurname() + ", зарплата: " + list[i].getSalary() + " руб");
             }
         }
